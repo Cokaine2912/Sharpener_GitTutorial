@@ -78,6 +78,8 @@ function handleFormSubmit(event) {
     const del_but = document.createElement('button');
     del_but.id = "db"
     del_but.className = "db"
+    del_but.style.marginLeft = "5px"
+    del_but.style.marginRight = "5px"
     const del_text = document.createTextNode('Delete Expense');
 
     // EDIT Button
