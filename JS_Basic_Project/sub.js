@@ -44,15 +44,6 @@ updateList()
 
 
 
-
-
-
-
-
-
-
-
-
 function handleFormSubmit(event) {
     event.preventDefault();
 
