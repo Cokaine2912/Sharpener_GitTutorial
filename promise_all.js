@@ -3,7 +3,11 @@ let posts = [
     {title:"Post Two",body:"This is Post Two"}
 ];
 
-let activity = [{time:"not known"},{time:"not known"}]
+let user = {
+    naam : "Cokaine",
+    last_active : "not known"
+} 
+let activity = {time:"not known"}
 
 function getPosts(){
     setTimeout(()=>{
@@ -15,17 +19,17 @@ function getPosts(){
     },1000)
 }
 
-function craetePost(post){
+function createPost(post){
     return new Promise((resolve,reject)=>{
         setTimeout(()=>{
-            let k = new Date().toISOString();
-            activity.push({time:k})
+            post.createdAt = new Date().toISOString();
+            
             posts.push(post);
 
             const error = false;
 
         if (!error){
-            resolve(post.createdAt);
+            resolve(posts);
         }
         else {
             reject('Error')
@@ -34,20 +38,50 @@ function craetePost(post){
     })
 }
 
-let t = {title:"Post Three",body:"This is Post Three"}
-
-
+let p1 = {title:"Post Three",body:"This is Post Three",createdAt:""}
+let p2 = {title:"Post Four",body:"This is Post Four",createdAt:""}
+//craetePost(p1).then(console.log(posts))
 
 
 function updateLastUserActivityTime() {
     return new Promise( (resolve, reject) => {
         setTimeout( () => {
-            let op = activity;
-            document.body.innerHTML = op;;
-            resolve()
+
+            let k = new Date().toISOString()
+            user.last_active = k
+            resolve(k)
         }, 1000)
     }) 
 }
 
-craetePost(t).then(getPosts).then(console.log(activity))
+
+function deletePost(){
+    return new Promise((resolve,reject)=>{
+        let del = posts.pop()
+        resolve(posts)
+
+    })
+}
+
+
+let prom1 = createPost(p1)
+
+let prom2 = updateLastUserActivityTime()
+
+Promise.all([prom1,prom2]).then((values)=> {
+    
+    for (var i = 0;i < values[0].length;i++){
+        console.log(values[0][i].body)
+    }
+    console.log(`User Last Active at : ${values[1]}`)
+    let f = deletePost()
+    f.then((values)=>{
+        for (var i = 0;i < values.length ; i++){
+            console.log(values[i].body)
+        }
+    })
+    
+})
+
+
 
