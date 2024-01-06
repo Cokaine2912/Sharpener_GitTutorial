@@ -31,21 +31,19 @@ const Posting = async ()=>{
     }
 
 
-
-
     const update = function updateLastUserActivityTime() {
         return new Promise( (resolve, reject) => {
             setTimeout( () => {
     
                 let k = new Date().toISOString()
                 user.last_active = k
+                //console.log(k)
                 resolve(k)
             }, 1000)
         }) 
     }
 
     
-
     const hatadiya = function deletePost(){
         return new Promise((resolve,reject)=>{
             let del = posts.pop()
@@ -56,13 +54,25 @@ const Posting = async ()=>{
     
     let p1 = {title:"Post Three",body:"This is Post Three",createdAt:""}
 
-    let [new_posts,active_time] = await Promise.all([creation,update])
-    console.log(new_posts,active_time)
+    // let newP = await creation(p1)
 
-    return posts
+    // let active_time = await update()
 
+    let [newP,last_active] = await Promise.all([creation(p1),update()])
+
+    
+    let f = ()=>{
+        for (var i = 0;i < newP.length ; i ++){
+            console.log(newP[i].title)
+        }
+    }
+    f()
+    console.log("User last active at:",last_active)
+
+    let hatade = await hatadiya()
+
+    console.log(posts)
+
+    
 }
-Posting().then((m)=>{
-    console.log(m)
-})
-
+Posting()
