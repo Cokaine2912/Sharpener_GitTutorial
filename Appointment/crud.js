@@ -109,7 +109,7 @@ function show(ob){
 }
 
 
-
+// getting data
 
 let k = axios.get("https://crudcrud.com/api/1d72561f86834ce98d6301afdb2bcba1/appointments")
 k.then(res =>{
