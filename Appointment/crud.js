@@ -16,7 +16,7 @@ function handleFormSubmit(event) {
 
     // Using Axios
 
-    axios.post("https://crudcrud.com/api/1d72561f86834ce98d6301afdb2bcba1/appointments",myobj)
+    axios.post("https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments",myobj)
     .then((res)=>{
         console.log(res.data)
     })
@@ -111,7 +111,7 @@ function show(ob){
 
 // getting data
 
-let k = axios.get("https://crudcrud.com/api/1d72561f86834ce98d6301afdb2bcba1/appointments")
+let k = axios.get("https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments")
 k.then(res =>{
     if (res.data){
         //console.log("there is !")
@@ -120,11 +120,6 @@ k.then(res =>{
         }
     }
 })
-
-
-
-
-
 
 
 if (listings){
@@ -136,7 +131,24 @@ listings.addEventListener('click',function(event){
         const text = todel.textContent
         const email = text.split("-")[1].trim();
         listings.removeChild(todel);
-        localStorage.removeItem(email)
+        //localStorage.removeItem(email)
+
+        const emailToFind = email;
+
+        axios.get("https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments")
+        .then(res=>{
+            for (var i = 0;i < res.data.length;i ++){
+                if (res.data[i].email === emailToFind){
+                    const ID = res.data[i]._id
+                    axios.delete(`https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments/${ID}`)
+                }
+            }
+        })
+        
+
+        //const filteredAppointments = data.filter(appointment => appointment.email === emailToFind);
+
+
      }
 
      if(event.target.classList.contains('eb')){
