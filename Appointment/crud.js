@@ -16,9 +16,9 @@ function handleFormSubmit(event) {
 
     // Using Axios
 
-    axios.post("https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments",myobj)
+    axios.post("https://crudcrud.com/api/73e0bfe18f844554974060614b4f53e1/appointments",myobj)
     .then((res)=>{
-        console.log(res.data)
+        //console.log(res.data)
     })
     .catch((err)=>{
         console.log(err)
@@ -111,7 +111,7 @@ function show(ob){
 
 // getting data
 
-let k = axios.get("https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments")
+let k = axios.get("https://crudcrud.com/api/73e0bfe18f844554974060614b4f53e1/appointments")
 k.then(res =>{
     if (res.data){
         //console.log("there is !")
@@ -135,12 +135,12 @@ listings.addEventListener('click',function(event){
 
         const emailToFind = email;
 
-        axios.get("https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments")
+        axios.get("https://crudcrud.com/api/73e0bfe18f844554974060614b4f53e1/appointments")
         .then(res=>{
             for (var i = 0;i < res.data.length;i ++){
                 if (res.data[i].email === emailToFind){
                     const ID = res.data[i]._id
-                    axios.delete(`https://crudcrud.com/api/1336d8606fc4474e96f6da95901c8caa/appointments/${ID}`)
+                    axios.delete(`https://crudcrud.com/api/73e0bfe18f844554974060614b4f53e1/appointments/${ID}`)
                 }
             }
         })
@@ -157,19 +157,49 @@ listings.addEventListener('click',function(event){
         const email = text.split("-")[1].trim();
         const username = text.split("-")[0].trim();
         const phone = text.split("-")[2].trim();
-        console.log(email)
-        console.log(username)
+        // console.log(email)
+        // console.log(username)
         const only_phone = phone.split("Delete")[0]
         //console.log(only_phone)
         listings.removeChild(toedit);
-        localStorage.removeItem(email)
+        // localStorage.removeItem(email)
 
-        const naam = document.getElementById('username')
-        const dur = document.getElementById('phone')
-        const patta = document.getElementById('email')
-        naam.value = username ;
-        dur.value = only_phone;
-        patta.value = email
+
+        const emailToFind = email;
+
+        axios.get("https://crudcrud.com/api/73e0bfe18f844554974060614b4f53e1/appointments")
+        .then(res=>{
+            for (var i = 0;i < res.data.length;i ++){
+                if (res.data[i].email === emailToFind){
+                    const ID = res.data[i]._id
+                    const username = res.data[i].username;
+                    const email = res.data[i].email
+                    const only_phone = res.data[i].phone
+                    axios.delete(`https://crudcrud.com/api/73e0bfe18f844554974060614b4f53e1/appointments/${ID}`)
+                    const naam = document.getElementById('username')
+                    const dur = document.getElementById('phone')
+                    const patta = document.getElementById('email')
+                    naam.value = username ;
+                    dur.value = only_phone;
+                    patta.value = email
+                }
+            }
+        })
+
+
+
+
+
+
+
+
+
+        // const naam = document.getElementById('username')
+        // const dur = document.getElementById('phone')
+        // const patta = document.getElementById('email')
+        // naam.value = username ;
+        // dur.value = only_phone;
+        // patta.value = email
         // console.log(naam)
 
 
