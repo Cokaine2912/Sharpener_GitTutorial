@@ -1,0 +1,39 @@
+h1 {
+  background-color: greenyellow;
+  padding: 10px;
+  text-align: center;
+  border: 2px;
+  border-color: black;
+  border-style: groove;
+}
+
+h2 {
+  color: brown;
+  font-size: 30px;
+}
+#price_text {
+  font-size: 20px;
+}
+
+ul {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: oblique;
+  text-decoration: none;
+}
+
+li {
+  font-family: "Courier New", Courier, monospace;
+  font-style: normal;
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+#sub {
+  background-color: greenyellow;
+}
+
+#db {
+  background-color: whitesmoke;
+}

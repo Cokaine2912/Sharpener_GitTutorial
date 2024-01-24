@@ -26,7 +26,6 @@ function handleFormSubmit(event) {
 
 }
 
-
 var table_map = {
     "Table 1" : "one",
     "Table 2" : "two",
